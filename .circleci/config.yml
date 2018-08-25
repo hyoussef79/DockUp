@@ -61,7 +61,7 @@ jobs:
         command: docker image load --input "docker-image/${CIRCLE_SHA1}"
     - run:
         name: Run Rspecs
-        command: docker run --env-file .env-test -e "CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN" tareksamni/dockup:${CIRCLE_SHA1} bundle exec rspec && bundle exec codeclimate-test-reporter
+        command: docker run --env-file ./env-test.list --env CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN tareksamni/dockup:${CIRCLE_SHA1} bundle exec rspec && bundle exec codeclimate-test-reporter
   docker_push:
     <<: *defaults
     steps:
